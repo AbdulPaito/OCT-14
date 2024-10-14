@@ -116,10 +116,11 @@ mysqli_close($conn);
         
         .form-group input[type="text"],
         .form-group input[type="password"] {
-            width: calc(100% - 40px); /* Adjust width to accommodate the eye icon */
+            width: 283px;
             padding: 8px;
             border: 1px solid #ccc;
             border-radius: 4px;
+            
         }
 
         .form-group .password-container {
@@ -132,7 +133,7 @@ mysqli_close($conn);
         
         .form-group .eye-icon {
             position: absolute;
-            right: 30px;
+            right: 15px;
             top: 40px;
             transform: translateY(-50%);
             cursor: pointer;
