@@ -339,7 +339,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <input type="text" name="date_accomplished" value="<?php echo htmlspecialchars($user['date_accomplished']); ?>" required>
             <br>
             <label for="registrar_signature">Registrar Signature:</label>
-            <input type="text" name="registrar_signature" value="<?php echo htmlspecialchars($user['registrar_signature']); ?>" required>
+            <input type="text" name="registrar_signature" value="<?php echo htmlspecialchars($user['registrar_signature']); ?>" >
             <br>
             <label for="date_received">Date Received:</label>
             <input type="text" name="date_received" value="<?php echo htmlspecialchars($user['date_received']); ?>" required>
