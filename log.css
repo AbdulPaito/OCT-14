@@ -54,6 +54,12 @@ section {
   margin-bottom: -100px;
 }
 
+
+.signin h2{
+  position: relative;
+  bottom: -20px;
+}
+
 .logo-container {
   position: flex;
   top: 10px;
@@ -119,6 +125,7 @@ section .signin .content .form .inputBox label {
 
 section .signin .content .form .inputBox input:focus ~ label,
 section .signin .content .form .inputBox input:valid ~ label {
+  transform: translateY(-25px);
   font-size: 0.8em;
   color: #fff;
 }
@@ -163,10 +170,15 @@ section .signin .content .form .inputBox input[type="submit"]:hover {
   transform: scale(1.1); /* Example effect on hover */
    
 }
+.signup p {
+  position: relative;
+  top: -25px;
+}
 
 .signup {
   color: #ffffff;
   font-size: bold;
+
 }
 
 .signup a {
