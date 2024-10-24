@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 14, 2024 at 03:25 AM
+-- Generation Time: Oct 24, 2024 at 10:24 AM
 -- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- PHP Version: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -40,7 +40,7 @@ CREATE TABLE `admins` (
 --
 
 INSERT INTO `admins` (`id`, `username_admin`, `password_admin`, `email_admin`, `role`) VALUES
-(3, 'admin', 'admin', 'admin2@gmail.com', 'admin');
+(1, 'admin', 'admin', 'admin', 'admin');
 
 -- --------------------------------------------------------
 
@@ -104,9 +104,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `email`, `profile_image`, `uli_number`, `entry_date`, `last_name`, `first_name`, `middle_name`, `address_number_street`, `address_barangay`, `address_district`, `address_city_municipality`, `address_province`, `address_region`, `email_facebook`, `contact_no`, `nationality`, `sex`, `civil_status`, `employment_status`, `month_of_birth`, `day_of_birth`, `year_of_birth`, `age`, `birthplace_city_municipality`, `birthplace_province`, `birthplace_region`, `educational_attainment`, `parent_guardian_name`, `parent_guardian_address`, `classification`, `disability`, `cause_of_disability`, `taken_ncae`, `where_ncae`, `when_ncae`, `qualification`, `scholarship`, `privacy_disclaimer`, `applicant_signature`, `date_accomplished`, `registrar_signature`, `date_received`, `imageUpload`, `status`, `registration_complete`) VALUES
-(21, 'russelle', '09179842586', 'russelleroxas@gmail.com', 'uploads/wallpaperflare.com_wallpaper (2).jpg', 'vfffg', '2024-09-25', 'roxas', 'russelle', 'aberin', 'Street 17', 'Plazang Luma', 'District 15', 'Arayat', 'Pampanga', 'Region 14', 'clemente.zean02@gmailcom', '09097733381', 'Filipino', 'female', 'widow', 'unemployed', '01', 7, 1929, 95, 'Guemasan', 'Pampanga', 'Region 8', 'pre_school', 'hh', 'aprilmiguey@gmail.com', 'Cooperatives', 'Visual Disability', 'Illness', 'Yes', 'tabuan', 'tabuan', 'Cookery NC II', 'STEP', 'Agree', 'abdul111', '07-22-2024', 'asdasdasd', 'abdul', 'Upload-image/434360384_2401854799997936_6939150835498329161_n.jpg', '', 1),
-(22, 'abdul', 'yyy', 'abdulpaito2129@gmail.com', 'Upload-image/434360384_2401854799997936_6939150835498329161_n.jpg', '123', '2024-10-01', 'paito', 'abdul', 'david', 'Street 15', 'Paralaya', 'District 6', 'Arayat', 'Pampanga', 'Region 3', 'abdul@gmail.com', '09097733381', 'Filipino', 'male', 'single', 'employed', '02', 6, 1930, 94, 'Baliti', 'Pampanga', 'Region 6', 'elementary_graduate', 'abdul', 'abdul200@gmail.com', 'Cooperatives', 'Mental/Intellectual', 'Congenital/Inborn', 'Yes', 'N/A', 'N/A', 'SMAW NC I and SMAW NC II', 'PESFA', 'Agree', 'abdul', '07-22-2024', 'Abdul ', '2024-07-22', 'Upload-image/434360384_2401854799997936_6939150835498329161_n.jpg', '', 1),
-(23, 'Jonathan Olano', 'jcvofamily', 'jonathanolano123@gmail.com', 'Upload-image/462113596_546610981101861_3279218796952721532_n.jpg', '123456', '2024-10-07', 'Olano', 'Jonathan', 'Vinuya', 'Street 7', 'Plazang Luma', 'District 1', 'Arayat', 'Pampanga', 'Region 3', 'jonathanolano123@gmail.com', '09301679008', 'Filipino', 'male', 'single', 'unemployed', '03', 26, 2004, 20, 'Arayat', 'Pampanga', 'Region 3', 'no_grade_completed', 'Josie Olano', '#0849 Plazang Luma', 'Students', 'Mental/Intellectual', 'Congenital/Inborn', 'No', 'idk', 'idk', 'Food and Beverage Service NC II', 'TWSP', 'Agree', 'wefewf', 'ewrwrtwet', 'fwfwefew', 'ewrewt', 'Upload-image/462113596_546610981101861_3279218796952721532_n.jpg', '', 1);
+(1, 'abdul', 'yyy', 'abdul@gmail.com', 'Upload-image/dash.png', '1234', '2024-10-24', 'Paito', 'Abdul Rahman', 'David', 'Street 2', 'Baliti', 'District 4', 'Arayat', 'Pampanga', 'Region 4', 'abdulpaito@gmail.com', '0909124214', 'Filipino', 'male', 'single', 'employed', '05', 21, 2003, 21, 'San Mateo', 'Pampanga', 'Region 3', 'college_graduate_or_higher', 'Abdul paito', 'Tabuan arayat pampanga', 'Senior Citizens', 'N/A', 'N/A', 'No', 'n/a', 'n/a', 'Front Office Service NC II', 'PESFA', 'Agree', 'abdul', '07-17-2024', 'registration', '07-17-2024', 'Upload-image/dash.png', '', 1);
 
 --
 -- Indexes for dumped tables
@@ -133,13 +131,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `admins`
 --
 ALTER TABLE `admins`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
