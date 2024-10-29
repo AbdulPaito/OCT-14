@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 24, 2024 at 10:24 AM
+-- Generation Time: Oct 29, 2024 at 12:42 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -40,7 +40,7 @@ CREATE TABLE `admins` (
 --
 
 INSERT INTO `admins` (`id`, `username_admin`, `password_admin`, `email_admin`, `role`) VALUES
-(1, 'admin', 'admin', 'admin', 'admin');
+(1, 'admin', 'admin', 'admin@gmail.com', 'admin');
 
 -- --------------------------------------------------------
 
@@ -104,7 +104,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `email`, `profile_image`, `uli_number`, `entry_date`, `last_name`, `first_name`, `middle_name`, `address_number_street`, `address_barangay`, `address_district`, `address_city_municipality`, `address_province`, `address_region`, `email_facebook`, `contact_no`, `nationality`, `sex`, `civil_status`, `employment_status`, `month_of_birth`, `day_of_birth`, `year_of_birth`, `age`, `birthplace_city_municipality`, `birthplace_province`, `birthplace_region`, `educational_attainment`, `parent_guardian_name`, `parent_guardian_address`, `classification`, `disability`, `cause_of_disability`, `taken_ncae`, `where_ncae`, `when_ncae`, `qualification`, `scholarship`, `privacy_disclaimer`, `applicant_signature`, `date_accomplished`, `registrar_signature`, `date_received`, `imageUpload`, `status`, `registration_complete`) VALUES
-(1, 'abdul', 'yyy', 'abdul@gmail.com', 'Upload-image/dash.png', '1234', '2024-10-24', 'Paito', 'Abdul Rahman', 'David', 'Street 2', 'Baliti', 'District 4', 'Arayat', 'Pampanga', 'Region 4', 'abdulpaito@gmail.com', '0909124214', 'Filipino', 'male', 'single', 'employed', '05', 21, 2003, 21, 'San Mateo', 'Pampanga', 'Region 3', 'college_graduate_or_higher', 'Abdul paito', 'Tabuan arayat pampanga', 'Senior Citizens', 'N/A', 'N/A', 'No', 'n/a', 'n/a', 'Front Office Service NC II', 'PESFA', 'Agree', 'abdul', '07-17-2024', 'registration', '07-17-2024', 'Upload-image/dash.png', '', 1);
+(1, 'abdul', 'abdul', 'abdul@gmail.com', 'Upload-image/dash.png', '1234', '2024-10-24', 'Paito', 'Abdul Rahman', 'David', 'Street 2', 'Baliti', 'District 4', 'Arayat', 'Pampanga', 'Region 4', 'abdulpaito@gmail.com', '0909124214', 'Filipino', 'male', 'single', 'employed', '05', 21, 2003, 21, 'San Mateo', 'Pampanga', 'Region 3', 'college_graduate_or_higher', 'Abdul paito', 'Tabuan arayat pampanga', 'Senior Citizens', 'N/A', 'N/A', 'No', 'n/a', 'n/a', 'Front Office Service NC II', 'PESFA', 'Agree', 'abdul', '07-17-2024', 'registration', '07-17-2024', 'Upload-image/dash.png', 'Pending', 1);
 
 --
 -- Indexes for dumped tables
