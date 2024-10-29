@@ -44,16 +44,16 @@ if (!$result) {
             position: relative;
             padding: 10px;
             width: auto;
-            margin-top: -36px;
+            margin-top: -30px;
             margin-left: -36px;
-        }
-
+        } 
+       
         /* Header styling within the registration section */
         #registration-section h1 {
         text-align: center;
         background: #1182fa;;
         color: #fff;
-        padding: 10px 0;
+        padding: 20px 0;
         margin: 0;
            
         }

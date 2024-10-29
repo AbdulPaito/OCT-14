@@ -2,7 +2,6 @@
 session_start();
 require_once('database.php'); // Ensure this includes your database connection
 
-$username = "";
 $new_password = "";
 $confirm_password = "";
 $message = "";
@@ -10,69 +9,45 @@ $message = "";
 // Fetch user data if an ID is provided
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
-
-    // Fetch current user data
-    $query = "SELECT username FROM users WHERE id = ?";
-    $stmt = mysqli_prepare($conn, $query);
-
-    if ($stmt) {
-        mysqli_stmt_bind_param($stmt, "i", $id);
-        mysqli_stmt_execute($stmt);
-        mysqli_stmt_bind_result($stmt, $username);
-        mysqli_stmt_fetch($stmt);
-        mysqli_stmt_close($stmt);
-    }
 }
 
 // Check if form was submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = $_POST['username'];
     $new_password = $_POST['password'];
     $confirm_password = $_POST['confirm_password'];
 
     // Initialize query variables
-    $query = "UPDATE users SET username = ?";
-    $params = [$username];
+    $query = "UPDATE users SET password = ?";
+    $params = [$new_password];
     $types = "s";
 
-    // Add password update if new password is provided and confirmed
+    // Check if new password is provided and confirmed
     if (!empty($new_password)) {
         if ($new_password === $confirm_password) {
-            $query .= ", password = ?";
-            $params[] = $new_password;
-            $types .= "s";
+            // Prepare and execute the query
+            $query .= " WHERE id = ?";
+            $params[] = $id;
+            $types .= "i";
+
+            $stmt = mysqli_prepare($conn, $query);
+
+            if ($stmt) {
+                mysqli_stmt_bind_param($stmt, $types, ...$params);
+                $success = mysqli_stmt_execute($stmt);
+
+                if ($success) {
+                    $message = "Password updated successfully.";
+                } else {
+                    $message = "Error updating password: " . mysqli_error($conn);
+                }
+            } else {
+                $message = "Prepare statement failed: " . mysqli_error($conn);
+            }
+
+            mysqli_stmt_close($stmt);
         } else {
             $message = "Passwords do not match.";
         }
-    }
-
-    if (empty($message)) {
-        $query .= " WHERE id = ?";
-        $params[] = $id;
-        $types .= "i";
-
-        // Prepare and execute the query
-        $stmt = mysqli_prepare($conn, $query);
-
-        if ($stmt) {
-            mysqli_stmt_bind_param($stmt, $types, ...$params);
-            $success = mysqli_stmt_execute($stmt);
-
-            if ($success) {
-                $message = "User updated successfully.";
-
-                // Update session if the user updates their own username or password
-                if (isset($_SESSION['username']) && $_SESSION['username'] === $username) {
-                    $_SESSION['username'] = $username;
-                }
-            } else {
-                $message = "Error updating user: " . mysqli_error($conn);
-            }
-        } else {
-            $message = "Prepare statement failed: " . mysqli_error($conn);
-        }
-
-        mysqli_stmt_close($stmt);
     }
 }
 
@@ -84,7 +59,7 @@ mysqli_close($conn);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit User</title>
+    <title>Edit Password</title>
     <style>
         body, input, button {
             font-family: Arial, sans-serif;
@@ -127,7 +102,6 @@ mysqli_close($conn);
             font-size: 0.9em;
         }
         
-        .form-group input[type="text"],
         .form-group input[type="password"] {
             width: 100%;
             padding: 10px 35px 10px 10px;
@@ -180,15 +154,11 @@ mysqli_close($conn);
 </head>
 <body>
     <div class="form-container">
-        <h2>Edit User</h2>
+        <h2>Edit Password</h2>
         <?php if (!empty($message)) : ?>
             <p><?php echo $message; ?></p>
         <?php endif; ?>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) . '?id=' . $id; ?>" method="POST">
-            <div class="form-group">
-                <label for="username">Username:</label>
-                <input type="text" id="username" name="username" value="<?php echo htmlspecialchars($username); ?>">
-            </div>
             <div class="form-group">
                 <label for="password">New Password:</label>
                 <input type="password" id="password" name="password">
@@ -200,7 +170,7 @@ mysqli_close($conn);
                 <i class="fas fa-eye eye-icon" onclick="togglePassword('confirm_password')"></i>
             </div>
             <div class="form-group">
-                <button type="submit" name="submit">Change password</button>
+                <button type="submit" name="submit">Change Password</button>
                 <a href="dashboard.php?page=settings">Go Back</a>
             </div>
         </form>
