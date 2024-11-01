@@ -300,18 +300,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </script>
 
 <script>
-    document.querySelector('form').addEventListener('submit', function(event) {
-        const applicantSignature = document.getElementById('applicant_signature').value.trim();
-        const dateAccomplished = document.getElementById('date_accomplished').value.trim();
-        const registrarSignature = document.getElementById('registrar_signature').value.trim();
-        const dateReceived = document.getElementById('date_received').value.trim();
-
-        if (!applicantSignature || !dateAccomplished || !registrarSignature || !dateReceived) {
-            alert('Please fill in all required fields.');
-            event.preventDefault(); // Prevent form submission
-        }
-    });
-
+    
     function previewImage(event) {
         const reader = new FileReader();
         reader.onload = function() {
