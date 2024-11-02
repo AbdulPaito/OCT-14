@@ -333,16 +333,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <input type="text" name="privacy_disclaimer" value="<?php echo htmlspecialchars($user['privacy_disclaimer']); ?>" required>
             <br>
             <label for="applicant_signature">Applicant Signature:</label>
-            <input type="text" name="applicant_signature" value="<?php echo htmlspecialchars($user['applicant_signature']); ?>" required>
+            <input type="text" name="applicant_signature" value="<?php echo htmlspecialchars($user['applicant_signature']); ?>" >
             <br>
             <label for="date_accomplished">Date Accomplished:</label>
-            <input type="text" name="date_accomplished" value="<?php echo htmlspecialchars($user['date_accomplished']); ?>" required>
+            <input type="text" name="date_accomplished" value="<?php echo htmlspecialchars($user['date_accomplished']); ?>" >
             <br>
             <label for="registrar_signature">Registrar Signature:</label>
             <input type="text" name="registrar_signature" value="<?php echo htmlspecialchars($user['registrar_signature']); ?>" >
             <br>
             <label for="date_received">Date Received:</label>
-            <input type="text" name="date_received" value="<?php echo htmlspecialchars($user['date_received']); ?>" required>
+            <input type="text" name="date_received" value="<?php echo htmlspecialchars($user['date_received']); ?>" >
             <br>
 
             <label for="imageUpload">Picture:</label>
