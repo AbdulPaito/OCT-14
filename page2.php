@@ -72,11 +72,15 @@ $cities = [
             'San Agustin Norte', 'San Agustin Sur', 'San Antonio', 'San Jose Mesulo', 
             'San Juan Bano', 'San Mateo', 'San Nicolas', 'San Roque Bitas', 
             'Cupang (Santa Lucia)', 'Matamo (Santa Lucia)', 'Santo Niño Tabuan', 
-            'Suclayin', 'Telapayong', 'Kaledian (Camba)'
+            'Suclayin', 'Telapayong', 'Kaledian (Camba)',
+            'Angeles City', 'San Fernando City', 'Apalit', 'Bacolor', 'Candaba', 
+            'Floridablanca', 'Guagua', 'Lubao', 'Magalang', 'Mabalacat', 'Macabebe', 
+            'San Luis', 'San Simon', 'Santo Tomas', 'Mexico', 'Porac', 'Santa Ana', 'Santa Rita',
+            'Cabiao', 'San Vicente'
 ];
 
 $provinces = [
-    'Pampanga',
+    'Pampanga', 'Nueva Ecija'
    
 ];
 

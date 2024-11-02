@@ -318,6 +318,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <select id="address_city_municipality" name="address_city_municipality" onchange="updateBarangays()">
                         <option value="">Select City/Municipality</option>
                         <option value="Arayat">Arayat</option>
+                        <option value="San Vicente">San Vicente</option>
+                        <option value="Cabiao">Cabiao</option>
+                        <option value="Magalang">Magalang</option>
+                        <option value="Magalang">Magalang</option>
+                        <option value="Mexico">Mexico</option>
+                        <option value="Santa Ana">Santa Ana</option>
+                        <option value="San Fernando">San Fernando</option>
+                        <option value="Candaba">Candaba</option>
                     </select>
 
 
@@ -376,7 +384,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <script>
 
-    const data = {
+const data = {
     'Arayat': {
         barangays: [
             'Arenas', 'Baliti', 'Batasan', 'Buensuceso', 'Candating', 'Gatiawin', 
@@ -406,12 +414,246 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             'Region 1', 'Region 2', 'Region 3', 'Region 4', 'Region 5', 
             'Region 6', 'Region 7', 'Region 8', 'Region 9', 'Region 10', 
             'Region 11', 'Region 12', 'Region 13', 'Region 14', 'Region 15', 
-            'Region 16', 'Region 17', 'Region 18' // You can add more as needed
+            'Region 16', 'Region 17', 'Region 18'
         ],
-        nationalities: ['Filipino']
+        nationalities: ['Filipino', 'Chinese', 'Japanese', 'Korean', 'Foreigner', 'American', 
+            'British', 'Australian', 'Canadian', 'German', 'French', 'Italian', 
+            'Russian', 'Indian', 'Mexican', 'Brazilian', 'Thai', 'Indonesian', 
+            'Vietnamese', 'South African']
+    },
+    'San Vicente': {
+        barangays: [
+            'Aplaya', 'Bagong Sikat', 'Bunga', 'Calabangan', 'Catug-a', 'Concepcion',
+            'Dalan Bago', 'Dapdap', 'Gapan', 'Iba', 'Labi', 'Lakas', 'Labi-Labi', 
+            'Lagundian', 'Ligtong', 'Magsaysay', 'Maligaya', 'Magsaysay Norte', 'Pias',
+            'San Jose', 'San Vicente', 'Santo Domingo', 'Santo Niño', 'Silangan', 'Suyoc'
+        ],
+        streets: [
+            'Street 1', 'Street 2', 'Street 3', 'Street 4', 'Street 5', 'Street 6', 
+            'Street 7', 'Street 8', 'Street 9', 'Street 10', 'Street 11', 'Street 12', 
+            'Street 13', 'Street 14', 'Street 15', 'Street 16', 'Street 17', 'Street 18', 
+            'Street 19', 'Street 20'
+        ],
+        districts: [
+            'District 1', 'District 2', 'District 3', 'District 4', 'District 5', 
+            'District 6', 'District 7', 'District 8', 'District 9', 'District 10', 
+            'District 11', 'District 12', 'District 13', 'District 14', 'District 15', 
+            'District 16', 'District 17', 'District 18', 'District 19', 'District 20'
+        ],
+        provinces: [
+            'Nueva Ecija'
+        ],
+        regions: [
+            'Region 1', 'Region 2', 'Region 3', 'Region 4', 'Region 5', 
+            'Region 6', 'Region 7', 'Region 8', 'Region 9', 'Region 10', 
+            'Region 11', 'Region 12', 'Region 13', 'Region 14', 'Region 15', 
+            'Region 16', 'Region 17', 'Region 18'
+        ],
+        nationalities: ['Filipino', 'Chinese', 'Japanese', 'Korean', 'Foreigner', 'American', 
+            'British', 'Australian', 'Canadian', 'German', 'French', 'Italian', 
+            'Russian', 'Indian', 'Mexican', 'Brazilian', 'Thai', 'Indonesian', 
+            'Vietnamese', 'South African']
+    },
+    'Cabiao': {
+        barangays: [
+            'Bagong Buhay ("Lote")', 'Bagong Sikat', 'Bagong Silang', 'Concepcion', 'Entablado', 
+            'Maligaya', 'Natividad North (Pob.)', 'Natividad South (Pob.)', 'Palasinan', 
+            'San Antonio ("Pantalan")', 'San Fernando Norte', 'San Fernando Sur', 'San Gregorio',
+            'San Juan North (Pob.)', 'San Juan South (Pob.)', 'San Roque', 'San Vicente', 
+            'Santa Rita', 'Sinipit', 'Polilio', 'San Carlos', 'Santa Isabel', 'Santa Ines'
+        ],
+        streets: [
+            'Street 1', 'Street 2', 'Street 3', 'Street 4', 'Street 5', 'Street 6', 
+            'Street 7', 'Street 8', 'Street 9', 'Street 10', 'Street 11', 'Street 12', 
+            'Street 13', 'Street 14', 'Street 15', 'Street 16', 'Street 17', 'Street 18', 
+            'Street 19', 'Street 20'
+        ],
+        districts: [
+            'District 1', 'District 2', 'District 3', 'District 4', 'District 5', 
+            'District 6', 'District 7', 'District 8', 'District 9', 'District 10', 
+            'District 11', 'District 12', 'District 13', 'District 14', 'District 15', 
+            'District 16', 'District 17', 'District 18', 'District 19', 'District 20'
+        ],
+        provinces: [
+            'Nueva Ecija'
+        ],
+        regions: [
+            'Region 1', 'Region 2', 'Region 3', 'Region 4', 'Region 5', 
+            'Region 6', 'Region 7', 'Region 8', 'Region 9', 'Region 10', 
+            'Region 11', 'Region 12', 'Region 13', 'Region 14', 'Region 15', 
+            'Region 16', 'Region 17', 'Region 18'
+        ],
+        nationalities: ['Filipino', 'Chinese', 'Japanese', 'Korean', 'Foreigner', 'American', 
+            'British', 'Australian', 'Canadian', 'German', 'French', 'Italian', 
+            'Russian', 'Indian', 'Mexican', 'Brazilian', 'Thai', 'Indonesian', 
+            'Vietnamese', 'South African']
+    },
+    'Magalang': {
+        barangays: [
+            'Amsic', 'Ayala', 'Bagong Sikat', 'Bano', 'Bulaon', 'Calumpang', 'Cutud', 
+            'Del Carmen', 'Dela Paz', 'Gugo', 'Laug', 'Longos', 'Macabulos', 'Magsaysay',
+            'Mamag', 'Pandacaqui', 'Poblacion', 'San Agustin', 'San Isidro', 'San Jose',
+            'San Pedro', 'Santo Domingo', 'Santo Rosario', 'Sapang Maisac', 'San Vicente'
+        ],
+        streets: [
+            'Street 1', 'Street 2', 'Street 3', 'Street 4', 'Street 5', 'Street 6', 
+            'Street 7', 'Street 8', 'Street 9', 'Street 10', 'Street 11', 'Street 12', 
+            'Street 13', 'Street 14', 'Street 15', 'Street 16', 'Street 17', 'Street 18', 
+            'Street 19', 'Street 20'
+        ],
+        districts: [
+           'District 1', 'District 2', 'District 3', 'District 4', 'District 5', 
+            'District 6', 'District 7', 'District 8', 'District 9', 'District 10', 
+            'District 11', 'District 12', 'District 13', 'District 14', 'District 15', 
+            'District 16', 'District 17', 'District 18', 'District 19', 'District 20'
+        ],
+        provinces: [
+            'Pampanga'
+        ],
+        regions: [
+           'Region 1', 'Region 2', 'Region 3', 'Region 4', 'Region 5', 
+            'Region 6', 'Region 7', 'Region 8', 'Region 9', 'Region 10', 
+            'Region 11', 'Region 12', 'Region 13', 'Region 14', 'Region 15', 
+            'Region 16', 'Region 17', 'Region 18'
+        ],
+        nationalities: ['Filipino', 'Chinese', 'Japanese', 'Korean', 'Foreigner', 'American', 
+            'British', 'Australian', 'Canadian', 'German', 'French', 'Italian', 
+            'Russian', 'Indian', 'Mexican', 'Brazilian', 'Thai', 'Indonesian', 
+            'Vietnamese', 'South African']
+    },
+    'Mexico': {
+        barangays: [
+           'Bagong Bario', 'Bulaon', 'Calumpang', 'Dela Paz', 'Del Rosario', 'Lagundi', 
+           'Longos', 'Magalang', 'Mabalacat', 'Matapat', 'Magsaysay', 'San Antonio',
+            'San Jose', 'San Miguel', 'San Vicente', 'Santa Monica', 'Santo Niño', 
+            'Santo Rosario'
+        ],
+        streets: [
+            'Street 1', 'Street 2', 'Street 3', 'Street 4', 'Street 5', 'Street 6', 
+            'Street 7', 'Street 8', 'Street 9', 'Street 10', 'Street 11', 'Street 12', 
+            'Street 13', 'Street 14', 'Street 15', 'Street 16', 'Street 17', 'Street 18', 
+            'Street 19', 'Street 20'
+        ],
+        districts: [
+            'District 1', 'District 2', 'District 3', 'District 4', 'District 5', 
+            'District 6', 'District 7', 'District 8', 'District 9', 'District 10', 
+            'District 11', 'District 12', 'District 13', 'District 14', 'District 15', 
+            'District 16', 'District 17', 'District 18', 'District 19', 'District 20'
+        ],
+        provinces: [
+            'Pampanga'
+        ],
+        regions: [
+           'Region 1', 'Region 2', 'Region 3', 'Region 4', 'Region 5', 
+            'Region 6', 'Region 7', 'Region 8', 'Region 9', 'Region 10', 
+            'Region 11', 'Region 12', 'Region 13', 'Region 14', 'Region 15', 
+            'Region 16', 'Region 17', 'Region 18'
+        ],
+        nationalities: ['Filipino', 'Chinese', 'Japanese', 'Korean', 'Foreigner', 'American', 
+            'British', 'Australian', 'Canadian', 'German', 'French', 'Italian', 
+            'Russian', 'Indian', 'Mexican', 'Brazilian', 'Thai', 'Indonesian', 
+            'Vietnamese', 'South African']
+ },
+    'Santa Ana': {
+        barangays: [
+            'Babo Pangulo', 'Bagumbayan', 'Bulaon', 'Dela Paz', 'Dulong Bayan', 
+            'Lubao', 'Manibaug', 'Pambuan', 'Poblacion', 'San Antonio', 'San Pedro', 
+            'San Vicente', 'Santa Cruz', 'Santa Rita', 'Santo Domingo'
+        ],
+        streets: [
+           'Street 1', 'Street 2', 'Street 3', 'Street 4', 'Street 5', 'Street 6', 
+            'Street 7', 'Street 8', 'Street 9', 'Street 10', 'Street 11', 'Street 12', 
+            'Street 13', 'Street 14', 'Street 15', 'Street 16', 'Street 17', 'Street 18', 
+            'Street 19', 'Street 20'
+        ],
+        districts: [
+            'District 1', 'District 2', 'District 3', 'District 4', 'District 5', 
+            'District 6', 'District 7', 'District 8', 'District 9', 'District 10', 
+            'District 11', 'District 12', 'District 13', 'District 14', 'District 15', 
+            'District 16', 'District 17', 'District 18', 'District 19', 'District 20'
+        ],
+        provinces: [
+            'Pampanga'
+        ],
+        regions: [
+            'Region 1', 'Region 2', 'Region 3', 'Region 4', 'Region 5', 
+            'Region 6', 'Region 7', 'Region 8', 'Region 9', 'Region 10', 
+            'Region 11', 'Region 12', 'Region 13', 'Region 14', 'Region 15', 
+            'Region 16', 'Region 17', 'Region 18'
+        ],
+        nationalities: ['Filipino', 'Chinese', 'Japanese', 'Korean', 'Foreigner', 'American', 
+            'British', 'Australian', 'Canadian', 'German', 'French', 'Italian', 
+            'Russian', 'Indian', 'Mexican', 'Brazilian', 'Thai', 'Indonesian', 
+            'Vietnamese', 'South African']
+    },
+    'San Fernando': {
+        barangays: [
+            'Baliti', 'Bulaon', 'Del Pilar', 'Dolores', 'Dela Paz Norte', 'Dela Paz Sur',
+             'Guembe', 'Lagundian', 'San Agustin', 'San Isidro', 'San Jose', 'San Juan', 
+             'San Nicolas', 'Santo Rosario', 'San Pedro', 'San Vicente', 'Santo Tomas',
+              'Santa Lucia', 'Santa Teresita'
+        ],
+        streets: [
+          'Street 1', 'Street 2', 'Street 3', 'Street 4', 'Street 5', 'Street 6', 
+            'Street 7', 'Street 8', 'Street 9', 'Street 10', 'Street 11', 'Street 12', 
+            'Street 13', 'Street 14', 'Street 15', 'Street 16', 'Street 17', 'Street 18', 
+            'Street 19', 'Street 20'
+        ],
+        districts: [
+            'District 1', 'District 2', 'District 3', 'District 4', 'District 5', 
+            'District 6', 'District 7', 'District 8', 'District 9', 'District 10', 
+            'District 11', 'District 12', 'District 13', 'District 14', 'District 15', 
+            'District 16', 'District 17', 'District 18', 'District 19', 'District 20'
+        ],
+        provinces: [
+            'Pampanga'
+        ],
+        regions: [
+            'Region 1', 'Region 2', 'Region 3', 'Region 4', 'Region 5', 
+            'Region 6', 'Region 7', 'Region 8', 'Region 9', 'Region 10', 
+            'Region 11', 'Region 12', 'Region 13', 'Region 14', 'Region 15', 
+            'Region 16', 'Region 17', 'Region 18'
+        ],
+        nationalities: ['Filipino', 'Chinese', 'Japanese', 'Korean', 'Foreigner', 'American', 
+            'British', 'Australian', 'Canadian', 'German', 'French', 'Italian', 
+            'Russian', 'Indian', 'Mexican', 'Brazilian', 'Thai', 'Indonesian', 
+            'Vietnamese', 'South African']
+    },
+    'Candaba': {
+        barangays: [
+            'Abar 1st', 'Abar 2nd', 'Bacolor', 'Bagang', 'Banga', 'Bulaon', 'Calumpang',
+             'Concepcion', 'Dela Paz', 'Del Rosario', 'Dolores', 'Laoang', 'Longos',
+              'Mangga', 'Mangunang', 'Masamat', 'Minalin', 'Paguet', 'Poblacion',
+            'San Antonio', 'San Bartolome', 'San Isidro', 'San Jose', 'San Luis',
+             'San Pedro', 'San Vicente', 'Santo Niño', 'Santo Rosario', 'Santa Teresita'
+        ],
+        streets: [
+            'Street 1', 'Street 2', 'Street 3', 'Street 4', 'Street 5', 'Street 6', 
+            'Street 7', 'Street 8', 'Street 9', 'Street 10', 'Street 11', 'Street 12', 
+            'Street 13', 'Street 14', 'Street 15', 'Street 16', 'Street 17', 'Street 18', 
+            'Street 19', 'Street 20'
+        ],
+        districts: [
+            'District 1', 'District 2', 'District 3', 'District 4', 'District 5', 
+            'District 6', 'District 7', 'District 8', 'District 9', 'District 10', 
+            'District 11', 'District 12', 'District 13', 'District 14', 'District 15', 
+            'District 16', 'District 17', 'District 18', 'District 19', 'District 20'
+        ],
+        provinces: [
+            'Pampanga'
+        ],
+        regions: [
+            'Region 1', 'Region 2', 'Region 3', 'Region 4', 'Region 5', 
+            'Region 6', 'Region 7', 'Region 8', 'Region 9', 'Region 10', 
+            'Region 11', 'Region 12', 'Region 13', 'Region 14', 'Region 15', 
+            'Region 16', 'Region 17', 'Region 18'
+        ],
+        nationalities: ['Filipino', 'Chinese', 'Japanese', 'Korean', 'Foreigner', 'American', 
+            'British', 'Australian', 'Canadian', 'German', 'French', 'Italian', 
+            'Russian', 'Indian', 'Mexican', 'Brazilian', 'Thai', 'Indonesian', 
+            'Vietnamese', 'South African']
     }
 };
-
 
 function updateBarangays() {
     const citySelect = document.getElementById('address_city_municipality');
@@ -425,27 +667,32 @@ function updateBarangays() {
     document.getElementById('address_region').innerHTML = '<option value="">Select Region</option>';
     document.getElementById('nationality').innerHTML = '<option value="">Select Nationality</option>';
 
-    document.getElementById('address_barangay').disabled = true;
     document.getElementById('address_number_street').disabled = true;
     document.getElementById('address_district').disabled = true;
     document.getElementById('address_province').disabled = true;
     document.getElementById('address_region').disabled = true;
     document.getElementById('nationality').disabled = true;
 
-    if (selectedCity === 'Arayat') {
+    if (selectedCity) {
         barangaySelect.disabled = false;
-        data['Arayat'].barangays.forEach(barangay => {
+        const barangays = data[selectedCity].barangays;
+
+        barangays.forEach(barangay => {
             const option = document.createElement('option');
             option.value = barangay;
-            option.textContent = barangay;
+            option.text = barangay;
             barangaySelect.appendChild(option);
         });
+    } else {
+        barangaySelect.disabled = true;
     }
 }
 
 function updateStreets() {
+    const citySelect = document.getElementById('address_city_municipality');
     const barangaySelect = document.getElementById('address_barangay');
     const streetSelect = document.getElementById('address_number_street');
+    const selectedCity = citySelect.value;
     const selectedBarangay = barangaySelect.value;
 
     streetSelect.innerHTML = '<option value="">Select Number, Street</option>';
@@ -460,21 +707,21 @@ function updateStreets() {
     document.getElementById('address_region').disabled = true;
     document.getElementById('nationality').disabled = true;
 
-    if (selectedBarangay) {
+    if (['Arayat', 'San Vicente', 'Cabiao', 'Magalang',  'Mexico', 'Santa Ana', 'San Fernando', 'Candaba'].includes(selectedCity)) {
         streetSelect.disabled = false;
-        data['Arayat'].streets.forEach(street => {
+        data[selectedCity].streets.forEach(street => {
             const option = document.createElement('option');
             option.value = street;
-            option.textContent = street;
+            option.text = street;
             streetSelect.appendChild(option);
         });
     }
 }
 
 function updateDistricts() {
-    const streetSelect = document.getElementById('address_number_street');
+    const citySelect = document.getElementById('address_city_municipality');
     const districtSelect = document.getElementById('address_district');
-    const selectedStreet = streetSelect.value;
+    const selectedCity = citySelect.value;
 
     districtSelect.innerHTML = '<option value="">Select District</option>';
     document.getElementById('address_province').innerHTML = '<option value="">Select Province</option>';
@@ -486,21 +733,21 @@ function updateDistricts() {
     document.getElementById('address_region').disabled = true;
     document.getElementById('nationality').disabled = true;
 
-    if (selectedStreet) {
+    if (['Arayat', 'San Vicente', 'Cabiao', 'Magalang', 'Mexico', 'Santa Ana', 'San Fernando', 'Candaba'].includes(selectedCity)) {
         districtSelect.disabled = false;
-        data['Arayat'].districts.forEach(district => {
+        data[selectedCity].districts.forEach(district => {
             const option = document.createElement('option');
             option.value = district;
-            option.textContent = district;
-            districtSelect.appendChild(option);
+            option.text = district;
+            districtSelect.appendChild (option);
         });
     }
 }
 
 function updateProvinces() {
-    const districtSelect = document.getElementById('address_district');
+    const citySelect = document.getElementById('address_city_municipality');
     const provinceSelect = document.getElementById('address_province');
-    const selectedDistrict = districtSelect.value;
+    const selectedCity = citySelect.value;
 
     provinceSelect.innerHTML = '<option value="">Select Province</option>';
     document.getElementById('address_region').innerHTML = '<option value="">Select Region</option>';
@@ -510,21 +757,21 @@ function updateProvinces() {
     document.getElementById('address_region').disabled = true;
     document.getElementById('nationality').disabled = true;
 
-    if (selectedDistrict) {
+    if (['Arayat','San Vicente', 'Cabiao', 'Magalang', 'Mexico', 'Santa Ana', 'San Fernando', 'Candaba'].includes(selectedCity)) {
         provinceSelect.disabled = false;
-        data['Arayat'].provinces.forEach(province => {
+        data[selectedCity].provinces.forEach(province => {
             const option = document.createElement('option');
             option.value = province;
-            option.textContent = province;
+            option.text = province;
             provinceSelect.appendChild(option);
         });
     }
 }
 
 function updateRegions() {
-    const provinceSelect = document.getElementById('address_province');
+    const citySelect = document.getElementById('address_city_municipality');
     const regionSelect = document.getElementById('address_region');
-    const selectedProvince = provinceSelect.value;
+    const selectedCity = citySelect.value;
 
     regionSelect.innerHTML = '<option value="">Select Region</option>';
     document.getElementById('nationality').innerHTML = '<option value="">Select Nationality</option>';
@@ -532,32 +779,32 @@ function updateRegions() {
     document.getElementById('address_region').disabled = true;
     document.getElementById('nationality').disabled = true;
 
-    if (selectedProvince) {
+    if (['Arayat', 'San Vicente', 'Cabiao', 'Magalang', 'Mexico', 'Santa Ana', 'San Fernando', 'Candaba'].includes(selectedCity)) {
         regionSelect.disabled = false;
-        data['Arayat'].regions.forEach(region => {
+        data[selectedCity].regions.forEach(region => {
             const option = document.createElement('option');
             option.value = region;
-            option.textContent = region;
+            option.text = region;
             regionSelect.appendChild(option);
         });
     }
 }
 
 function updateNationalities() {
-    const regionSelect = document.getElementById('address_region');
+    const citySelect = document.getElementById('address_city_municipality');
     const nationalitySelect = document.getElementById('nationality');
-    const selectedRegion = regionSelect.value;
+    const selectedCity = citySelect.value;
 
     nationalitySelect.innerHTML = '<option value="">Select Nationality</option>';
 
     document.getElementById('nationality').disabled = true;
 
-    if (selectedRegion) {
+    if (['Arayat', 'San Vicente', 'Cabiao', 'Magalang', 'Mexico', 'Santa Ana', 'San Fernando', 'Candaba'].includes(selectedCity)) {
         nationalitySelect.disabled = false;
-        data['Arayat'].nationalities.forEach(nationality => {
+        data[selectedCity].nationalities.forEach(nationality => {
             const option = document.createElement('option');
             option.value = nationality;
-            option.textContent = nationality;
+            option.text = nationality;
             nationalitySelect.appendChild(option);
         });
     }
