@@ -364,7 +364,7 @@ left: -45px;
             <tr>
                 <td class="image"><img src="TESDA-Logo.png" alt="Logo" class="logo"></td>
                 <td class="tesda">Technical Education and Skills Development Authority<br>Pangasiwaan sa Edukasyong Teknikal at Pagpapaunlad ng Kasanayan</td>
-                <td><p class="italic-text">MIS 03 - 01<br>(ver.2018)</p></td>
+                <td class="image"><img src="Exactlogo1.jfif" alt="Logo" class="logo"></td>
             </tr>
         </table>
         <table class="r">
