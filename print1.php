@@ -728,7 +728,7 @@ left: -45px;
     </tr>
     <tr>
       <td colspan="3">
-        <label for="applicant-signature">APPLICANT'S SIGNATURE OVER PRINTED NAME</label>
+        <label for="applicant-signature">APPLICANT'S SIGNATURE</label>
         <input type="text" id="applicant-signature" readonly value="<?php echo htmlspecialchars($data['applicant_signature']); ?>">
         <label for="date-accomplished">DATE ACCOMPLISHED</label>
         <input type="text" id="date-accomplished" readonly value="<?php echo htmlspecialchars($data['date_accomplished']); ?>">
