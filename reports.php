@@ -46,6 +46,11 @@ $query = "
         WHERE qualification LIKE '%$course%' 
 ";
 
+// Add additional condition for searching by name
+if (!empty($search)) {
+    $query .= " OR CONCAT(first_name, ' ', last_name) LIKE '%$search%'";
+}
+
 // Add date filtering to the query if provided
 if ($startDate && $endDate) {
     $query .= " AND entry_date BETWEEN '$startDate' AND '$endDate'";
@@ -215,6 +220,7 @@ form input[type="text"]:focus {
             <th><i class="fas fa-user"></i> NAME</th>
             <th><i class="fas fa-calendar-alt"></i> Entry Date</th>
             <th><i class="fas fa-users"></i> BATCH</th>
+            <th><i class="fas fa-info-circle"></i> STATUS</th>
             <th><i class="fas fa-book-open"></i> COURSE</th>
             <th><i class="fas fa-print"></i> PRINT</th>
         </tr>
@@ -229,6 +235,7 @@ form input[type="text"]:focus {
                 <td><?php echo htmlspecialchars($row['first_name']); ?></td>
                 <td><?php echo htmlspecialchars($row['entry_date']); ?></td>
                 <td><?php echo htmlspecialchars($row['batch']); ?></td>
+                <td><?php echo htmlspecialchars($row['status']); ?></td>
                 <td><?php echo htmlspecialchars($row['qualification']); ?></td>
                 <td><a class="print-button" href="print1.php?id=<?php echo $row['id']; ?>"> <i class="fas fa-print"></i> Print</a></td>
             </tr>
