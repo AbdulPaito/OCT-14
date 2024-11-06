@@ -12,8 +12,60 @@ if (!$connection) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
-// Step 2: Execute query to fetch data
-$query = "SELECT * FROM users";
+// Step 2: Handle search query with batch and date parsing
+$search = isset($_GET['search']) ? mysqli_real_escape_string($connection, $_GET['search']) : '';
+$course = '';
+$batch = '';
+$startDate = '';
+$endDate = '';
+
+// Parse search query to extract course and batch
+preg_match('/(.*?)\s*(batch\s+\d+)/i', $search, $matches);  // Extract course and batch
+if ($matches) {
+    $course = trim($matches[1]);  // Course name
+    $batch = trim($matches[2]);   // Batch number
+} else {
+    $course = $search;  // If no batch is specified, treat the whole search term as course name
+}
+
+// Convert batch number to an integer (if a batch is provided)
+$batchNumber = $batch ? (int) filter_var($batch, FILTER_SANITIZE_NUMBER_INT) : 0;
+
+// Handle date search, if provided
+if (isset($_GET['start_date']) && isset($_GET['end_date'])) {
+    $startDate = mysqli_real_escape_string($connection, $_GET['start_date']);
+    $endDate = mysqli_real_escape_string($connection, $_GET['end_date']);
+}
+
+// Step 3: Build the query based on the parsed search input
+$query = "
+    SELECT * FROM (
+        SELECT *, 
+        CEIL(ROW_NUMBER() OVER (PARTITION BY qualification ORDER BY entry_date) / 25) AS batch
+        FROM users
+        WHERE qualification LIKE '%$course%' 
+";
+
+// Add additional condition for searching by name
+if (!empty($search)) {
+    $query .= " OR CONCAT(first_name, ' ', last_name) LIKE '%$search%'";
+}
+
+// Add date filtering to the query if provided
+if ($startDate && $endDate) {
+    $query .= " AND entry_date BETWEEN '$startDate' AND '$endDate'";
+}
+
+$query .= ") AS numbered_users";
+
+// If a batch number is specified, filter by batch; otherwise, show all batches
+if ($batchNumber > 0) {
+    $query .= " WHERE batch = $batchNumber";
+}
+
+$query .= " ORDER BY entry_date";  // Ordering by registration date for display
+
+// Execute the query
 $result = mysqli_query($connection, $query);
 
 // Check if query execution was successful
@@ -21,7 +73,6 @@ if (!$result) {
     die("Query failed: " . mysqli_error($connection));
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -47,14 +98,6 @@ if (!$result) {
             margin: 0;
         }
 
-        /* Paragraph styling */
-        #profile-section p {
-            font-size: 1.2em;
-            color: #666;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
         /* Table styling */
         .profile-table {
             width: 100%;
@@ -62,8 +105,7 @@ if (!$result) {
             margin: 0;
         }
 
-        .profile-table th,
-        .profile-table td {
+        .profile-table th, .profile-table td {
             padding: 10px;
             text-align: center;
             border-bottom: 1px solid #ddd;
@@ -105,140 +147,88 @@ if (!$result) {
         .delete-button:hover {
             background: #e53935;
         }
-        
-        /* Dropdown styling */
-        .status-select {
-            width: 100%;
-            padding: 5px;
+
+        /* Search Form Styling */
+        form {
+            display: flex;
+            justify-content: right;
+            margin-bottom: 20px;
+            position: relative;
+            top: 10px;
+        }
+
+        form input[type="text"] {
+            width: 300px;
+            padding: 10px;
             border: 1px solid #ddd;
             border-radius: 4px;
+            font-size: 1em;
+            margin-right: 10px;
             box-sizing: border-box;
         }
 
-        /* Search Form Styling */
-form {
-    display: flex;
-    justify-content: right;
-    margin-bottom: 20px;
-    position: relative;
-    top: 10px;
-}
+        form button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            background: #007bff;
+            color: #fff;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
 
-form input[type="text"] {
-    width: 300px;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 1em;
-    margin-right: 10px;
-    box-sizing: border-box;
-}
+        form button:hover {
+            background: #0056b3;
+        }
 
-form button {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    background: #007bff;
-    color: #fff;
-    font-size: 1em;
-    cursor: pointer;
-    transition: background 0.3s ease;
-}
+        form input[type="text"]::placeholder {
+            color: #aaa;
+            font-style: italic;
+        }
 
-form button:hover {
-    background: #0056b3;
-}
-
-form input[type="text"]::placeholder {
-    color: #aaa;
-    font-style: italic;
-}
-
-form input[type="text"]:focus {
-    border-color: #007bff;
-    outline: none;
-}
-
+        form input[type="text"]:focus {
+            border-color: #007bff;
+            outline: none;
+        }
     </style>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('.status-select').change(function() {
-                var status = $(this).val();
-                var id = $(this).data('id');
-                
-                $.ajax({
-                    url: 'update_status.php',
-                    type: 'POST',
-                    data: { id: id, status: status },
-                    success: function(response) {
-                        console.log('Status updated successfully:', response);
-                    },
-                    error: function(xhr, status, error) {
-                        console.error('Error updating status:', error);
-                    }
-                });
-            });
-        });
-    </script>
 </head>
 <body>
 
 <section id="profile-section">
     <h1>Profile</h1>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <form method="GET" action="dashboard.php" style="margin-bottom: 20px;">
-    <input type="hidden" name="page" value="profile">
-    <input type="text" name="search" placeholder="Search by name or course" value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>">
-    <button type="submit">Search</button>
-    </form>
 
+    <!-- Search Form -->
+    <form method="GET" action="dashboard.php">
+        <input type="hidden" name="page" value="profile">
+        <input type="text" name="search" placeholder="Search by name, course, or batch (e.g., Cookery batch 1)" value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>">
+        <button type="submit">Search</button>
+    </form>
 
     <!-- Profile Table -->
     <table class="profile-table">
         <thead>
-        <tr>
-        <th><i class="fas fa-id-badge"></i> ID</th>
-        <th><i class="fas fa-user"></i> NAME</th>
-        <th><i class="fas fa-book-open"></i> COURSE</th>
-        <th><i class="fas fa-calendar-alt"></i> Entry Date</th>
-        <th><i class="fas fa-info-circle"></i> STATUS</th>
-        <th><i class="fas fa-edit"></i> EDIT</th>
-        <th><i class="fas fa-trash-alt"></i> DELETE</th>
-        </tr>
-
+            <tr>
+                <th>ID</th>
+                <th>NAME</th>
+                <th>COURSE</th>
+                <th>Entry Date</th>
+                <th>STATUS</th>
+                <th>BATCH</th> 
+                <th>EDIT</th>
+                <th>DELETE</th>
+            </tr>
         </thead>
         <tbody>
             <?php
-                // Database connection and query
-                $host = 'localhost';
-                $user = ''; 
-                $password = '';
-                $database = 'tesda';
-
-                $connection = mysqli_connect($host, $user, $password, $database);
-
-                if (!$connection) {
-                    die("Connection failed: " . mysqli_connect_error());
-                }
-
-                // Step 2: Handle search query
-                $search = isset($_GET['search']) ? mysqli_real_escape_string($connection, $_GET['search']) : '';
-                $query = "SELECT * FROM users WHERE first_name LIKE '%$search%' OR qualification LIKE '%$search%'";
-                $result = mysqli_query($connection, $query);
-
-                if (!$result) {
-                    die("Query failed: " . mysqli_error($connection));
-                }
-
-                // Display results
-                $counter = 1;
-                if ($result) {
-                    while ($row = mysqli_fetch_assoc($result)) {
+            // Display results from the query
+            $counter = 1;
+            while ($row = mysqli_fetch_assoc($result)) {
             ?>
                 <tr>
                     <td><?php echo $counter++; ?></td>
-                    <td><?php echo htmlspecialchars($row['first_name']); ?></td>
+                    <td><?php echo htmlspecialchars($row['first_name'] . ' ' . $row['last_name']); ?></td>
                     <td><?php echo htmlspecialchars($row['qualification']); ?></td>
                     <td><?php echo htmlspecialchars($row['entry_date']); ?></td>
                     <td>
@@ -249,14 +239,43 @@ form input[type="text"]:focus {
                             <option value="Drop" <?php echo ($row['status'] == 'Drop') ? 'selected' : ''; ?>>Drop</option>
                         </select>
                     </td>
+                    <td><?php echo htmlspecialchars($row['batch']); ?></td>
                     <td><a class="edit-button" href="edit-profile.php?id=<?php echo $row['id']; ?>">Edit</a></td>
                     <td><a class="delete-button" href="delete-profile.php?id=<?php echo $row['id']; ?>">Delete</a></td>
                 </tr>
             <?php
-                    }
-                }
-                mysqli_close($connection);
+            }
             ?>
         </tbody>
     </table>
 </section>
+
+</body>
+</html>
+
+<?php
+// Close the connection
+mysqli_close($connection);
+?>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('.status-select').change(function() {
+            var status = $(this).val();
+            var id = $(this).data('id');
+            
+            $.ajax({
+                url: 'update_status.php',
+                type: 'POST',
+                data: { id: id, status: status },
+                success: function(response) {
+                    console.log('Status updated successfully:', response);
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error updating status:', error);
+                }
+            });
+        });
+    });
+</script>
