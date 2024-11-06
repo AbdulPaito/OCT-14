@@ -12,11 +12,55 @@ if (!$connection) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
-// Step 2: Handle search query
+// Step 2: Handle search query with batch and date parsing
 $search = isset($_GET['search']) ? mysqli_real_escape_string($connection, $_GET['search']) : '';
+$course = '';
+$batch = '';
+$startDate = '';
+$endDate = '';
 
-// Step 3: Modify query to include search functionality
-$query = "SELECT * FROM users WHERE first_name LIKE '%$search%' OR qualification LIKE '%$search%'";
+// Parse search query to extract course and batch
+preg_match('/(.*?)\s*(batch\s+\d+)/i', $search, $matches);  // Extract course and batch
+if ($matches) {
+    $course = trim($matches[1]);  // Course name
+    $batch = trim($matches[2]);   // Batch number
+} else {
+    $course = $search;  // If no batch is specified, treat the whole search term as course name
+}
+
+// Convert batch number to an integer (if a batch is provided)
+$batchNumber = $batch ? (int) filter_var($batch, FILTER_SANITIZE_NUMBER_INT) : 0;
+
+// Handle date search, if provided
+if (isset($_GET['start_date']) && isset($_GET['end_date'])) {
+    $startDate = mysqli_real_escape_string($connection, $_GET['start_date']);
+    $endDate = mysqli_real_escape_string($connection, $_GET['end_date']);
+}
+
+// Step 3: Build the query based on the parsed search input
+$query = "
+    SELECT * FROM (
+        SELECT *, 
+        CEIL(ROW_NUMBER() OVER (PARTITION BY qualification ORDER BY entry_date) / 25) AS batch
+        FROM users
+        WHERE qualification LIKE '%$course%' 
+";
+
+// Add date filtering to the query if provided
+if ($startDate && $endDate) {
+    $query .= " AND entry_date BETWEEN '$startDate' AND '$endDate'";
+}
+
+$query .= ") AS numbered_users";
+
+// If a batch number is specified, filter by batch; otherwise, show all batches
+if ($batchNumber > 0) {
+    $query .= " WHERE batch = $batchNumber";
+}
+
+$query .= " ORDER BY entry_date";  // Ordering by registration date for display
+
+// Execute the query
 $result = mysqli_query($connection, $query);
 
 // Check if query execution was successful
@@ -24,7 +68,6 @@ if (!$result) {
     die("Query failed: " . mysqli_error($connection));
 }
 ?>
-
 
 
 
@@ -170,6 +213,8 @@ form input[type="text"]:focus {
         <tr>
             <th><i class="fas fa-id-badge"></i> ID</th>
             <th><i class="fas fa-user"></i> NAME</th>
+            <th><i class="fas fa-calendar-alt"></i> Entry Date</th>
+            <th><i class="fas fa-users"></i> BATCH</th>
             <th><i class="fas fa-book-open"></i> COURSE</th>
             <th><i class="fas fa-print"></i> PRINT</th>
         </tr>
@@ -182,6 +227,8 @@ form input[type="text"]:focus {
             <tr>
                 <td><?php echo $counter++; ?></td>
                 <td><?php echo htmlspecialchars($row['first_name']); ?></td>
+                <td><?php echo htmlspecialchars($row['entry_date']); ?></td>
+                <td><?php echo htmlspecialchars($row['batch']); ?></td>
                 <td><?php echo htmlspecialchars($row['qualification']); ?></td>
                 <td><a class="print-button" href="print1.php?id=<?php echo $row['id']; ?>"> <i class="fas fa-print"></i> Print</a></td>
             </tr>
