@@ -202,7 +202,7 @@ if (!$result) {
     <!-- Search Form -->
     <form method="GET" action="dashboard.php">
         <input type="hidden" name="page" value="profile">
-        <input type="text" name="search" placeholder="Search by name, course, or batch (e.g., Cookery batch 1)" value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>">
+        <input type="text" name="search" placeholder="Search by name, course, or batch" value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>">
         <button type="submit">Search</button>
     </form>
 

@@ -210,7 +210,7 @@ form input[type="text"]:focus {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <form method="GET" action="dashboard.php">
         <input type="hidden" name="page" value="reports">
-        <input type="text" name="search" placeholder="Search by user or course..." value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>">
+        <input type="text" name="search" placeholder="Search by name, course, or batch" value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>">
         <button type="submit">Search</button>
     </form>
     <table class="reports-table">
